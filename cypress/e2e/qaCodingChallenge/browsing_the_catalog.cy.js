@@ -18,11 +18,11 @@ describe("Browsing the catalog", () => {
   });
 
   it("Test - verifying the products listings and Filtering, sorting and Navigating to the product ", () => {
-    //Visiting the Boohoo website and login into the website
+    // Visit the website and log in with valid credentials
     cy.login();
 
-    //Here I'm using pause because sometimes in website, it is popping up with Image Captcha.
-    //Image captcha can't be do  automation. so, I am pausing the application manually resolving the Image Captcha
+    // Pause is used here because sometimes the website shows an Image Captcha.
+    // Image Captchas can't be automated, so manually resolve the captcha during the pause.
     cy.pause();
 
     cy.get("@data").then((data) => {
@@ -33,7 +33,7 @@ describe("Browsing the catalog", () => {
       catalogsPage.selectCategory(data.productName).click({ force: true });
       cy.url().should("include", "tall-clothing");
 
-      //sorting the products fron Low to High
+      //sorting the products fron Low to High price
       productsPage
         .selectSortButton()
         .select(data.priceLowToHigh)
@@ -41,17 +41,21 @@ describe("Browsing the catalog", () => {
 
       cy.wait(4000);
 
-      //Validate the products are displaying in sort order
-      // but in website I found a error , products are not displayed as expected
+      // Validate that the products are displayed in sorted order
+      // Note: There is a known bug on the website where the products are not sorted as expected
       let previousPrice = 0;
+
       productsPage.selectProductsPrice().each(($price, index, $list) => {
         const priceText = $price.text().replace("£", "").trim();
         const currentPrice = parseFloat(priceText);
+        // For the first product, compare to initial previous price (0)
         if (index === 0) {
           expect(currentPrice).to.be.gte(previousPrice);
           previousPrice = currentPrice;
         } else {
+          // Ensure that the current price is greater than or equal to the previous price
           expect(currentPrice).to.be.gte(previousPrice);
+          //Update previous price to current price for next iteration
           previousPrice = currentPrice;
         }
       });

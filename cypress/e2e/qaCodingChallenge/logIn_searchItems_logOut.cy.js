@@ -17,24 +17,25 @@ describe("login and verify the search product and logout", () => {
   });
 
   it("login and search the items and Logout", () => {
-    //Visiting the Boohoo website and login into the website
+    // Visit the website and log in with valid credentials
     cy.login();
 
-    //Here I'm using pause because sometimes in website, it is popping up with Image Captcha.
-    //Image captcha can't be do  automation. so, I am pausing the application manually resolving the Image Captcha
+    // Pause is used here because sometimes the website shows an Image Captcha.
+    // Image Captchas can't be automated, so manually resolve the captcha during the pause.
     cy.pause();
 
     cy.get("@data").then((data) => {
+      // Verify the user is successfully redirected to the account page by checking the URL
       cy.url().should("contain", data.urlacoount);
 
-      //Searching the product
+      //Search the product
       homepage.searchIteams().type(data.DressName);
       homepage.searchButton().click();
 
-      //logout
+      //click on logout
       cy.logout();
 
-      //verifing the login url
+      // Verify that the user is redirected back to the login page
       cy.url().should("contain", "login");
     });
   });

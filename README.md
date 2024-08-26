@@ -2,7 +2,7 @@
     #/**
     # * @author Ravali
     # * Email: yandalaravali@gmail.com
-    # * GitHub Page: https://rajat.github.io/
+    # * GitHub Page: https://github.com/ravaliyandala0311?tab=repositories
     # * LinkedIn: https://www.linkedin.com/in/ravali-yadav-yandala-454121135/
     # */
     #/***************************************************/
@@ -28,7 +28,7 @@
 - [Project Structure](#project-structure)
 - [Configuration](#configuration)
 - [Reporting](#reporting)
-- [Contacts](#contacts)
+- [TestCases overview](#TestCase-overview)
 
 ## 📖 Introduction
 
@@ -57,7 +57,7 @@ Click on the image above to watch the tutorials. -->
 2. Navigate to the project directory:
 
    ```bash
-   cd TestAutomationFramework_YT_Rajat_API_Cypress_JS
+   cd CypressDemo
    ```
 
 3. Install dependencies:
@@ -123,28 +123,44 @@ The tests follow a modular and maintainable structure:
 
 Mochawesome report (Logs are attached) is stored in the `cypress/reports` directory.
 
+## To run Test reports
+
+```
+ npm run cy:headed "cypress\e2e\qaCodingChallenge\*.cy.js"
+
+```
+
+## TestCase-overview
+
 # Cypress E-commerce Tests
 
-This repository contains Cypress tests for testing the E-commerce dummy website [https://www.boohoo.com/](https://www.boohoo.com/).
+This repository contains Cypress tests for testing the E-commerce website [https://www.boohoo.com/](https://www.boohoo.com/).
 
-### Test Case 1: Validate User is Able to Login with Invalid Username and Password
+`Note: On this website, logging in triggers an image captcha that cannot be automated. I used cy.pause() to manually resolve the captcha, then click the resume button to continue`
 
-- Test file: `cypress/e2e/login.spec.cy.js`
-- Description: This test case aims to validate the behavior when a user attempts to log in using invalid credentials. It checks whether the system correctly displays an error message when the username and password are incorrect.
+### Test Case 1: Verify user cannot register with an already registered email
 
-### Test Case 2: Validate User is Able to Login with Username and Password
+- Test file: `cypress/e2e/qaCodingChallenge/registration.cy.js`
+- Description: This test case aims to validate the behavior when a user attempts to registrate with already existing emailId. It checks whether the system correctly displays an error message as "Looks like you already have an account with us. Please try logging in or use a different email address".
 
-- Test file: `cypress/e2e/login.spec.cy.js`
-- Description: This test case verifies the functionality of logging in with valid credentials. It checks whether the user can successfully access the website by providing their correct username and password.
+### Test Case 2: Validate User is Able to Login with Username and Password and verify to search a product and do Logout
 
-### Test Case 3: Adding Items to Cart and Checkout
+- Test file: `cypress/e2e/qaCodingChallenge/logIn_searchItems_logOut.cy.js`
+- Description: This test case verifies the functionality of logging in with valid credentials. It checks whether the user can successfully access the website by providing their correct username and password and search for a product, and log out of the website successfully
 
-- Test file: `cypress/e2e/checkout.spec.cy.js`
-- Description: This test case adds items to the cart, proceeds to checkout, fills in checkout information, verifies the order summary, and completes the purchase.
+### Test Case 3: Adding productss to Cart and Checkout
 
-### Test Case 4: Should sort products by price and continue shopping
+- Test file: `cypress/e2e/qaCodingChallenge/adding_products_toCart.cy.js`
+- Description: This test case adds items to the cart, proceeds to checkout, verifies the order summary amount on the products
 
-- Test file: `cypress/e2e/checkout.spec.cy.js`
-- Description: This test case verifies the functionality of sorting products by price in the online shopping application and then continuing shopping after adding an item to the cart.
+### Test Case 4: Applying Promocode to the Products
+
+- Test file: `cypress/e2e/qaCodingChallenge/apply_promoCode.cy.js`
+- Description: This test case verifies the application of a Promo code and verify the cart total, and check the promo code discount
+
+### Test Case 5: Browse the Catalog and verify products Should sort by price
+
+- Test file: `cypress/e2e/qaCodingChallenge/browsing_the_catalog.cy.js`
+- Description: This test case verifies the functionality of sorting products by price in the online shopping application but here In the website it is having some bug, it is not sorting as expected.
 
 Thanks for visiting my GitHub profile! 😊

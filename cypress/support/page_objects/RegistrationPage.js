@@ -2,37 +2,37 @@ export default class RegistrationPage {
   verifyBoohooTitle() {
     return cy.xpath("//a[@title='Boohoo']").should("be.visible");
   }
-  ClickSignInButton() {
+  getSignInButton() {
     let signInButton = "//a[@title='Sign in']";
     return cy.xpath(signInButton).should("be.visible");
   }
-  clickRegisterButton() {
+  getRegisterButton() {
     return cy
       .xpath("//a[@class='b-button m-small b-registration_benefits-button']")
       .should("be.visible");
   }
 
-  clickRegisterWithEmailAdress() {
+  getRegisterWithEmailAdress() {
     let registerEmailAddress = "(//input[@id='dwfrm_registration_customer_email'])[1]";
     return cy.xpath(registerEmailAddress).should("be.visible");
   }
 
-  clickContinueButton() {
-    return cy.get('[data-ref="step1"] > .b-button').click();
+  getContinueButton() {
+    return cy.get('[data-ref="step1"] > .b-button');
   }
 
-  clickCreateAccount() {
-    return cy.get(".b-form_box > .b-button").click({ force: true });
+  getCreateAccount() {
+    return cy.get(".b-form_box > .b-button");
   }
   checkRegistartionEmailBox() {
     return cy.xpath("//input[@id='dwfrm_registration_customer_emailregistationconfirm']").click();
   }
   fillRegistrationPassword() {
-    return cy.xpath("//div[@data-id='dwfrm_registration_login_password']").type("Dimpu@123");
+    return cy.xpath("//div[@data-id='dwfrm_registration_login_password']");
   }
 
   fillRegistrationConfirmPassword() {
-    return cy.xpath("//input[@id='dwfrm_registration_login_passwordconfirm']").type("Dimpu@123");
+    return cy.xpath("//input[@id='dwfrm_registration_login_passwordconfirm']");
   }
 
   fillFirstName() {
@@ -54,6 +54,12 @@ export default class RegistrationPage {
     return cy.get("#dwfrm_registration_customer_yearOfBirth");
   }
   clickCreatAccount() {
-    return cy.xpath("//button[@data-id='createAccountButton']");
+    return cy.get(":nth-child(9) > .b-button");
+  }
+
+  verifyAlertMessage() {
+    return cy.xpath(
+      "//div[@class='b-form_section m-required m-invalid']//div[@id='dwfrm_registration_customer_email-error']"
+    );
   }
 }

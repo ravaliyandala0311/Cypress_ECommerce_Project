@@ -10,19 +10,24 @@ describe("Authentication Registartion", () => {
     cy.fixture("registration").as("registration");
   });
 
-  it("Test -visit the Boohoo website and Register as new customer", () => {
+  it("Test -Verify user cannot register with an already registered email", () => {
+    //visit the Boohoo website
     cy.log("Visiting the Boohoo website ");
+
+    // Navigate to register page
     cy.registerPage();
+
     cy.get("@registration").then((data) => {
+      //clicking the Register Button and filling all the fields
       cy.log("clicking the Register Button and filling all the fields");
-      registrationPage.ClickSignInButton().click();
-      registrationPage.clickRegisterButton().click();
-      registrationPage.clickRegisterWithEmailAdress().type(data.emailId);
-      registrationPage.clickCreateAccount();
-      registrationPage.clickContinueButton();
+      registrationPage.getSignInButton().click();
+      registrationPage.getRegisterButton().click();
+      registrationPage.getRegisterWithEmailAdress().type(data.emailId);
+      registrationPage.getCreateAccount().click({ force: true });
+      registrationPage.getContinueButton().click();
       registrationPage.checkRegistartionEmailBox();
-      registrationPage.fillRegistrationPassword();
-      registrationPage.fillRegistrationConfirmPassword();
+      registrationPage.fillRegistrationPassword().type(data.password);
+      registrationPage.fillRegistrationConfirmPassword().type(data.password);
       registrationPage.fillFirstName().type(data.firstName);
       registrationPage.fillLastName().type(data.lastName);
       registrationPage.selectBirthDay().select(3).invoke("val").should("eq", data.birthDay);
@@ -33,7 +38,23 @@ describe("Authentication Registartion", () => {
         .should("eq", data.birthMonth);
       registrationPage.selectBirthYear().select(14).invoke("val").should("eq", data.birthyear);
       cy.log("After all fields filled then clicking on the CREATE ACCOUNT button");
+
+      //click on create Account button
       registrationPage.clickCreatAccount().click({ force: true });
+      // Pause is used here because sometimes the website shows an Image Captcha.
+      // Image Captchas can't be automated, so manually resolve the captcha during the pause.
+      cy.pause();
+
+      cy.wait(4000);
+
+      // verify the Alert message when creating with already existing email id
+      registrationPage
+        .verifyAlertMessage()
+        .find("span")
+        .should(
+          "contain",
+          "Looks like you already have an account with us. Please try logging in or use a different email address"
+        );
     });
   });
 });
