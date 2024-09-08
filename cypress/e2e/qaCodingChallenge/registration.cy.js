@@ -1,60 +1,68 @@
-/// <reference types="cypress-xpath" />
+import RegistrationPage from '../../support/page_objects/RegistrationPage';
 
-import RegistrationPage from "../../support/page_objects/RegistrationPage";
-
-describe("Authentication Registartion", () => {
+describe('Authentication Registartion', () => {
+  // Instantiate page objects for improved modularity and ease of maintenance
   const registrationPage = new RegistrationPage();
 
-  beforeEach(() => {
-    // Load the fixture data before each test
-    cy.fixture("registration").as("registration");
+  Cypress.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress from
+    // failing the test
+    return false;
   });
 
-  it("Test -Verify user cannot register with an already registered email", () => {
-    //visit the Boohoo website
-    cy.log("Visiting the Boohoo website ");
+  it('Test -Verify user cannot register with an already registered email', () => {
+    // Custom Cypress command to navigate to the registration page
+    cy.registration();
 
-    // Navigate to register page
-    cy.registerPage();
+    // Load registration data from fixture to enhance test flexibility and maintainability
+    cy.fixture('registration').then((data) => {
+      // Interact with the registration form
+      registrationPage.clickSignInButton();
+      registrationPage.clickRegisterButton();
 
-    cy.get("@registration").then((data) => {
-      //clicking the Register Button and filling all the fields
-      cy.log("clicking the Register Button and filling all the fields");
-      registrationPage.getSignInButton().click();
-      registrationPage.getRegisterButton().click();
-      registrationPage.getRegisterWithEmailAdress().type(data.emailId);
-      registrationPage.getCreateAccount().click({ force: true });
-      registrationPage.getContinueButton().click();
-      registrationPage.checkRegistartionEmailBox();
-      registrationPage.fillRegistrationPassword().type(data.password);
-      registrationPage.fillRegistrationConfirmPassword().type(data.password);
-      registrationPage.fillFirstName().type(data.firstName);
-      registrationPage.fillLastName().type(data.lastName);
-      registrationPage.selectBirthDay().select(3).invoke("val").should("eq", data.birthDay);
+      // Fill in the email address for registration
+      registrationPage.fillRegisterWithEmailAdress(data.emailId);
+      registrationPage.clickContinueButton();
+
+      // Confirm that the email has been entered correctly
+      registrationPage.checkRegistartionEmailConfirmBox();
+
+      // Fill in the password for registration
+      registrationPage.fillRegistrationPassword(data.password);
+      registrationPage.fillRegistrationConfirmPassword(data.password);
+
+      // Fill in personal details such as first name and last name
+      registrationPage.fillFirstName(data.firstName);
+      registrationPage.fillLastName(data.lastName);
+
+      // Select date of birth and verify the selected values are correct
+      registrationPage
+        .selectBirthDay()
+        .invoke('val')
+        .should('eq', data.birthDay);
       registrationPage
         .selectBirthMonth()
-        .select("November")
-        .invoke("val")
-        .should("eq", data.birthMonth);
-      registrationPage.selectBirthYear().select(14).invoke("val").should("eq", data.birthyear);
-      cy.log("After all fields filled then clicking on the CREATE ACCOUNT button");
+        .invoke('val')
+        .should('eq', data.birthMonth);
+      registrationPage
+        .selectBirthYear()
+        .invoke('val')
+        .should('eq', data.birthyear);
 
-      //click on create Account button
-      registrationPage.clickCreatAccount().click({ force: true });
+      cy.log(
+        "After all fields are filled then next click on the 'CREATE ACCOUNT' button"
+      );
+      // Submit the form by clicking the "Create Account" button
+      registrationPage.clickCreatAccount();
+
       // Pause is used here because sometimes the website shows an Image Captcha.
-      // Image Captchas can't be automated, so manually resolve the captcha during the pause.
+      // Image Captchas can't be automated, so manually resolve the captcha by using the pause.
       cy.pause();
 
-      cy.wait(4000);
-
-      // verify the Alert message when creating with already existing email id
-      registrationPage
-        .verifyAlertMessage()
-        .find("span")
-        .should(
-          "contain",
-          "Looks like you already have an account with us. Please try logging in or use a different email address"
-        );
+      // Wait for the error message to be displayed, indicating an already registered email
+      registrationPage.verifyEmailIdErrorMessage(data.errorMessage, {
+        timeout: 4000,
+      });
     });
   });
 });

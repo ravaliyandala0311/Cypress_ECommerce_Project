@@ -1,9 +1,9 @@
 {
-  "urlacoount": "myaccount",
-  "SearchText": "Dresses",
-  "DressName": "Petite Bandeau Puffball Mini Dress",
-  "DressName_Floral": "Floral Print Mesh Maxi Slip Dress",
+  "urlAcoount": "myaccount",
+  "productName": "Dresses",
+  "dressName": "Basic Rib Short Sleeve Maxi Dress",
   "promoCode": "EXTRA",
-  "successmessage": "has been applied to your order.",
-  "ukStandardDelivery": 3.99
+  "successMessage": "has been applied to your order.",
+  "ukStandardDelivery": 3.99,
+  "login": "login"
 }

@@ -1,35 +1,52 @@
 export default class CheckOutPage {
+  // Method to click on Check Out Button
   clickCheckOutButton() {
-    cy.xpath("//a[normalize-space()='Checkout']").click();
+    return cy
+      .get("[href='https://www.boohoo.com/checkout-login']")
+      .click({ force: true });
   }
-
-  typePromoCode() {
-    return cy.xpath("//input[@id='dwfrm_coupon_couponCode']").should("be.visible");
+  // Method to enter the promocode
+  enterPromoCode(promoCode) {
+    return cy.get('#dwfrm_coupon_couponCode').type(promoCode);
   }
-
-  ClickApplyButton() {
-    cy.xpath("//button[@type='submit'][normalize-space()='Apply']").click();
+  // Method to click on ApplyButton
+  clickApplyButton() {
+    return cy.get("[data-id='submitButton']").click();
   }
+  // Method to verify promocode Successmessage
   verifyPromoCodeSuccessMessage() {
-    return cy.xpath("//span[@class='b-coupon-status m-applied']");
+    return cy.get('.b-coupon-status');
   }
-
+  // Method to get the total value
   orderTotalValue() {
-    return cy.xpath("//td[@class='b-summary_table-value m-top_align']").should("be.visible");
+    return cy.get('.m-total > .b-summary_table-value').should('be.visible');
   }
+  // Method to get each product price
   getEachProductPrice() {
-    return cy.xpath("//div[@class='b-price-item m-new']").should("be.visible");
+    return cy
+      .get('.b-minicart_product-price_total > .b-price > .b-price-item')
+      .should('be.visible');
   }
+  // Method to get discount price
   getDiscountPrice() {
-    return cy.xpath("//div[@data-ref='couponSummary']/p[1]").should("be.visible");
+    return cy.get('.b-coupon-footer > :nth-child(1)').should('be.visible');
   }
-  getRemoveCodeButton() {
-    return cy.xpath("//button[normalize-space()='Remove code']").should("be.visible");
+  // Method to click on removePromocode Button
+  clickRemoveCodeButton() {
+    return cy
+      .get('.b-coupon-actions > .b-coupon-button')
+      .should('be.visible')
+      .click();
   }
-  getCartEditButton() {
-    return cy.xpath("//a[normalize-space()='Edit']").should("be.visible");
+  // Method to click on Edit Button
+  clickCartEditButton() {
+    return cy
+      .get("[aria-label='Edit products in shopping cart']")
+      .should('be.visible')
+      .click();
   }
-  getremoveProductButton() {
-    return cy.xpath("(//button[@class='b-cart_product-remove'])").should("be.visible");
+  // Method to remove the products from cart
+  getRemoveProductButton() {
+    return cy.get('.b-cart_product-remove').should('be.visible');
   }
 }

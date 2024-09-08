@@ -1,65 +1,85 @@
 export default class RegistrationPage {
-  verifyBoohooTitle() {
-    return cy.xpath("//a[@title='Boohoo']").should("be.visible");
+  // Method to click of SignIn button
+  clickSignInButton() {
+    return cy.get("[title='Sign in']").should('be.visible').click();
   }
-  getSignInButton() {
-    let signInButton = "//a[@title='Sign in']";
-    return cy.xpath(signInButton).should("be.visible");
-  }
-  getRegisterButton() {
+  // Method to click of Register Button
+  clickRegisterButton() {
     return cy
-      .xpath("//a[@class='b-button m-small b-registration_benefits-button']")
-      .should("be.visible");
+      .get('.b-registration_benefits > .b-button')
+      .should('be.visible')
+      .click();
   }
-
-  getRegisterWithEmailAdress() {
-    let registerEmailAddress = "(//input[@id='dwfrm_registration_customer_email'])[1]";
-    return cy.xpath(registerEmailAddress).should("be.visible");
+  // Method to enter the emailId
+  fillRegisterWithEmailAdress(emailId) {
+    return cy
+      .get(
+        ".b-form > [data-widget='inputEmail'] > #dwfrm_registration_customer_email"
+      )
+      .should('be.visible')
+      .type(emailId);
   }
-
-  getContinueButton() {
-    return cy.get('[data-ref="step1"] > .b-button');
+  // Method to click on continue button
+  clickContinueButton() {
+    return cy.get('[data-ref="step1"] > .b-button').click();
   }
-
-  getCreateAccount() {
-    return cy.get(".b-form_box > .b-button");
+  // Method to check the email confirm box
+  checkRegistartionEmailConfirmBox() {
+    return cy
+      .get('#dwfrm_registration_customer_emailregistationconfirm')
+      .click();
   }
-  checkRegistartionEmailBox() {
-    return cy.xpath("//input[@id='dwfrm_registration_customer_emailregistationconfirm']").click();
+  // Method to enter the password
+  fillRegistrationPassword(password) {
+    return cy.get('#dwfrm_registration_login_password').type(password);
   }
-  fillRegistrationPassword() {
-    return cy.xpath("//div[@data-id='dwfrm_registration_login_password']");
+  // Method to enter the confirm password
+  fillRegistrationConfirmPassword(password) {
+    return cy.get('#dwfrm_registration_login_passwordconfirm').type(password);
   }
-
-  fillRegistrationConfirmPassword() {
-    return cy.xpath("//input[@id='dwfrm_registration_login_passwordconfirm']");
+  // Method to enter the first name
+  fillFirstName(firstName) {
+    return cy.get('#dwfrm_registration_customer_firstname').type(firstName);
   }
-
-  fillFirstName() {
-    return cy.get("#dwfrm_registration_customer_firstname");
+  // Method to enter the last name
+  fillLastName(lastName) {
+    return cy.get('#dwfrm_registration_customer_lastname').type(lastName);
   }
-
-  fillLastName() {
-    return cy.get("#dwfrm_registration_customer_lastname");
-  }
+  // Method to select the birth Day
   selectBirthDay() {
-    return cy.get("#dwfrm_registration_customer_dayofbirth");
+    return cy.get('#dwfrm_registration_customer_dayofbirth').select(3);
   }
-
+  // Method to select the birth Month
   selectBirthMonth() {
-    return cy.get("#dwfrm_registration_customer_monthofbirth");
+    return cy
+      .get('#dwfrm_registration_customer_monthofbirth')
+      .select('November');
   }
-
+  // Method to select the birth Year
   selectBirthYear() {
-    return cy.get("#dwfrm_registration_customer_yearOfBirth");
+    return cy.get('#dwfrm_registration_customer_yearOfBirth').select(14);
   }
+  // Method to click on CreateAccount Button
   clickCreatAccount() {
-    return cy.get(":nth-child(9) > .b-button");
+    return cy.get(':nth-child(9) > .b-button').click({ force: true });
   }
-
-  verifyAlertMessage() {
-    return cy.xpath(
-      "//div[@class='b-form_section m-required m-invalid']//div[@id='dwfrm_registration_customer_email-error']"
+  // Method to verify the error message
+  getEmailIdErrorMessage() {
+    return cy.get('#dwfrm_registration_customer_email-error > span');
+  }
+  // Method to verify the error message
+  verifyEmailIdErrorMessage(expectedErrorMessage) {
+    return this.getEmailIdErrorMessage().should(
+      'contain',
+      expectedErrorMessage
     );
+  }
+  // Method to click on Accept Button cookies
+  clickCookiesAcceptButton() {
+    return cy.get('#onetrust-accept-btn-handler').click();
+  }
+  // Method to perform the complete login action
+  registration() {
+    this.clickCookiesAcceptButton();
   }
 }

@@ -1,9 +1,11 @@
 export default class CatalogsPage {
+  // Method to select the All clothing Menu
   selectAllClothingMenu() {
-    return cy.xpath("//a[contains(text(),'ALL CLOTHING')]").should("be.visible");
+    return cy.get(".womens-menu > [role='menuitem']").first();
   }
-  selectCategory(categoryName) {
-    let categoryItem = `//a[@class='b-menu_item-link m-regular'][normalize-space()='${categoryName}']`;
-    return cy.xpath(categoryItem);
+  // Method to select the Category under All clothing Menu
+  selectCategory() {
+    let categoryItem = 'a.b-menu_item-link.m-regular';
+    return cy.get(categoryItem);
   }
 }

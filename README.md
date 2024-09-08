@@ -17,7 +17,6 @@
 
 [![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)](https://code.visualstudio.com/)
 [![Mochawesome Reports](https://img.shields.io/badge/Mochawesome%20Reports-<COLOR>?style=for-the-badge&logo=mochawesome&logoColor=white)](https://www.npmjs.com/package/cypress-mochawesome-reporter)
-[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/features/actions)
 
 ## 📑 Table of Contents
 
@@ -42,8 +41,8 @@ Click on the image above to watch the tutorials. -->
 
 ## 🛠️ Prerequisites
 
-- [![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/) (v21.0.0 or higher recommended)
-- [![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/) (v9.5.1 or higher recommended)
+- [![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/) (v21.0.0)
+- [![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/) (v10.8.2)
 
 ## ▶️ Getting Started
 
@@ -82,22 +81,22 @@ The tests follow a modular and maintainable structure:
 |-- cypress
 |     |-- e2e
 |          |-- qaCodingChallenge
-|                |-- adding_products_toCart.cy.js
-|                |-- apply_promoCode.cy.js
-|                |-- browsing_the_catalog.cy.js
-                 |-- logIn_searchItems_logOut.cy.js
+|                |-- addingProductsToCart.cy.js
+|                |-- applyPromoCode.cy.js
+|                |-- browsingTheCatalog.cy.js
+                 |-- logInSearchItemslogOut.cy.cy.js
 |                |-- registration.cy.js
 |     |-- fixtures
 |           |-- browseCatalog.json
 |           |-- registration.json
 |           |-- testData.json
 |
-|     |-- reports
 |     |-- support
 |          |-- page_objects
 |                |-- CatalogsPage.js
 |                |-- CheckOutPage.js
 |                |-- HomePage.js
+|                |-- PageLogin.js
 |                |-- ProductsPage.js
 |                |-- RegistrationPage.js
 |          |-- commands.js
@@ -112,12 +111,13 @@ The tests follow a modular and maintainable structure:
 - `cypress/fixtures`: Contains external files (example: user test data) that can be used to mock data during tests.
 - `cypress/reports`: Contains the report for tests (Logs are attached).
 - `cypress/support`: Contains custom commands and global configuration.
+- `cypress/cypress.env.json`: Contains the base url and username,Password .
 - `cypress/support/page_object`: Contains the Utilities that provides methods for asserting different conditions on web elements.
 
 ## ⚙️ Configuration
 
 - Modify `cypress.config.js` for Cypress configuration settings.
-- Customize `commands.js` and other files in `cypress/support` for reusable commands.
+- Customize `cypress/support` for reusable commands.
 
 ## 📊 Reporting
 
@@ -145,22 +145,22 @@ This repository contains Cypress tests for testing the E-commerce website [https
 
 ### Test Case 2: Validate User is Able to Login with Username and Password and verify to search a product and do Logout
 
-- Test file: `cypress/e2e/qaCodingChallenge/logIn_searchItems_logOut.cy.js`
+- Test file: `cypress/e2e/qaCodingChallenge/logInSearchItemslogOut.cy.js`
 - Description: This test case verifies the functionality of logging in with valid credentials. It checks whether the user can successfully access the website by providing their correct username and password and search for a product, and log out of the website successfully
 
 ### Test Case 3: Adding productss to Cart and Checkout
 
-- Test file: `cypress/e2e/qaCodingChallenge/adding_products_toCart.cy.js`
+- Test file: `cypress/e2e/qaCodingChallenge/addingProductsToCart.cy.js`
 - Description: This test case adds items to the cart, proceeds to checkout, verifies the order summary amount on the products
 
 ### Test Case 4: Applying Promocode to the Products
 
-- Test file: `cypress/e2e/qaCodingChallenge/apply_promoCode.cy.js`
+- Test file: `cypress/e2e/qaCodingChallenge/applyPromoCode.cy.js`
 - Description: This test case verifies the application of a Promo code and verify the cart total, and check the promo code discount
 
 ### Test Case 5: Browse the Catalog and verify products Should sort by price
 
-- Test file: `cypress/e2e/qaCodingChallenge/browsing_the_catalog.cy.js`
+- Test file: `cypress/e2e/qaCodingChallenge/browsingTheCatalog.cy.js`
 - Description: This test case verifies the functionality of sorting products by price in the online shopping application but here In the website it is having some bug, it is not sorting as expected.
 
 Thanks for visiting my GitHub profile! 😊

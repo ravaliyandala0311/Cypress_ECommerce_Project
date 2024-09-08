@@ -1,30 +1,29 @@
 export default class ProductsPage {
-  seletProductSize() {
-    cy.get(
-      "#variation-swatch-button-1-16 > .b-variation_swatch-value > .b-variation_swatch-value_text"
-    )
-      .invoke("show")
+  // Method to select the dress size
+  seletDressSize() {
+    return cy
+      .get('#variation-swatch-button-1-24')
+      .invoke('show')
       .click({ force: true });
   }
+  // Method to click on AddToCart
   clickAddToCart() {
-    return cy
-      .xpath(
-        "//div[@class='b-product_actions-inner']//button[@class='b-product_addtocard b-button m-width_full ']"
-      )
-      .click();
+    return cy.get('.b-product_actions-inner > .b-product_addtocard').click();
   }
-
-  selectProduct(ProductName) {
-    cy.get(".b-product_tile-title").each(($ele, index, $list) => {
-      if ($ele.text().includes(ProductName)) {
-        cy.get(".b-product_tile-title").eq(index).click();
+  // Method to select the dress
+  selectDress(DressName) {
+    return cy.get('.b-product_tile-title').each(($ele, index, $list) => {
+      if ($ele.text().includes(DressName)) {
+        cy.get('.b-product_tile-title').eq(index).click();
       }
     });
   }
+  // Method to select the sort button
   selectSortButton() {
-    return cy.xpath(" //select[@id='plp-sort-desktop']");
+    return cy.get('#plp-sort-desktop');
   }
+  // Method to select the products Price
   selectProductsPrice() {
-    return cy.xpath("//span[@class='b-price-item m-new']");
+    return cy.get('.b-price  > .m-new');
   }
 }

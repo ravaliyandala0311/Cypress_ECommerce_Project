@@ -1,11 +1,21 @@
 export default class HomePage {
-  searchIteams() {
-    return cy.xpath("//input[@aria-owns='search-suggestions-list']").should("be.visible");
+  // Method to select the product
+  searchProduct(productName) {
+    return cy
+      .get("[aria-label='Search combobox']")
+      .should('be.visible')
+      .type(productName);
   }
-  searchButton() {
-    return cy.get(".b-search_input-submit").should("be.visible");
+  // Method to click on search button
+  clickSearchButton() {
+    return cy.get('.b-search_input-submit').should('be.visible').click();
   }
+  // Method to click on viewyouracart Button
   clickViewYourCartButton() {
-    cy.get(".b-minicart_icon-qty").click();
+    return cy.get('.b-minicart_icon-qty').click({ force: true });
+  }
+  // Method to click of header login Icon
+  clickHeaderLogInIcon() {
+    return cy.get('.b-header_login-icon', { timeout: 4000 }).click();
   }
 }
