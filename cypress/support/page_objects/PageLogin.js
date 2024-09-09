@@ -42,12 +42,12 @@ export default class PageLogin {
 
   // Method to enter the password
   enterPassword(password) {
-    cy.get(this.passwordInput).type(password);
+    return cy.get(this.passwordInput).should('be.visible').type(password);
   }
 
   // Method to click login button
   clickLogin() {
-    cy.get(this.loginButton).click();
+    return cy.get(this.loginButton).should('be.enabled').click();
   }
 
   // Method to perform the complete login action
