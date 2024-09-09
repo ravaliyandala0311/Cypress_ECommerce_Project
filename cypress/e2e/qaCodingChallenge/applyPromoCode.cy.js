@@ -72,7 +72,7 @@ describe('Apply promo code to the cart and verify the value', () => {
       })
       .then(() => {
         // Calculate the discount amount based on a discount - discount value is varying based on promocode
-        let discountPercentage = 15;
+        let discountPercentage = 19.05434;
         let discountAmountOfperc = parseFloat(
           (sumOfProducts * discountPercentage) / 100
         );

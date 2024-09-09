@@ -76,7 +76,6 @@ npm run cy:open
 The tests follow a modular and maintainable structure:
 
 ```
-|-- .vscode
 |
 |-- cypress
 |     |-- e2e
@@ -102,6 +101,8 @@ The tests follow a modular and maintainable structure:
 |          |-- commands.js
 |          |-- e2e.js
 |-- .gitignore
+|-- .eslintric.json
+|-- .prettierrc
 |-- cypress.config.js
 |-- cypress.env.json
 |-- package.json

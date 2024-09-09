@@ -24,7 +24,7 @@ export default class CheckOutPage {
   // Method to get each product price
   getEachProductPrice() {
     return cy
-      .get('.b-minicart_product-price_total > .b-price > .b-price-item')
+      .get('.b-minicart_product-price_total > .b-price > .m-new')
       .should('be.visible');
   }
   // Method to get discount price
