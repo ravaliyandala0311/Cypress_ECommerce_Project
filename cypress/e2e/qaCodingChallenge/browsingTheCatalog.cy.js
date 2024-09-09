@@ -31,10 +31,12 @@ describe('Browsing the catalog', () => {
         .selectCategory()
         .contains(data.productShopByFigure)
         .click({ force: true });
-      cy.url().should('include', 'tall-clothing');
 
       //sorting the products fron Low to High price
-      productsPage.selectSortButton().select(data.priceLowToHigh);
+      productsPage
+        .selectSortButton()
+        .select(data.priceLowToHigh, { timeout: 4000 });
+      cy.url().should('contain', data.priceLowToHighUrl);
 
       // Validate that the products are displayed in sorted order
       // Note: There is a known bug on the website where the products are not sorted as expected

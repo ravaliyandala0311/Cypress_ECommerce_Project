@@ -56,35 +56,35 @@ describe('Apply promo code to the cart and verify the value', () => {
       checkoutPage
         .verifyPromoCodeSuccessMessage()
         .should('contain', data.successMessage);
-    });
 
-    // Initialize a variable to accumulate the total price of the products in the cart
-    let sumOfProducts = 0;
+      // Initialize a variable to accumulate the total price of the products in the cart
+      let sumOfProducts = 0;
 
-    // Loop through each product's price in the cart, parse it, and accumulate the total
-    checkoutPage
-      .getEachProductPrice()
-      .each(($e1, Index, $list) => {
-        const priceValue = $e1.text();
-        const numericPrice = parseFloat(priceValue.replace('£', ''));
-        sumOfProducts = parseFloat(sumOfProducts) + numericPrice;
-        console.log('sumOfProducts', sumOfProducts);
-      })
-      .then(() => {
-        // Calculate the discount amount based on a discount - discount value is varying based on promocode
-        let discountPercentage = 19.05434;
-        let discountAmountOfperc = parseFloat(
-          (sumOfProducts * discountPercentage) / 100
-        );
-        console.log('after sumOfProducts ', sumOfProducts);
-        console.log('discount amount', discountAmountOfperc);
-        checkoutPage.getDiscountPrice().then(($ele) => {
-          const discontPriceText = $ele.text();
-          console.log('DiscountPriceText', discontPriceText);
-          expect(discontPriceText).to.contain(discountAmountOfperc);
+      // Loop through each product's price in the cart, parse it, and accumulate the total
+      checkoutPage
+        .getEachProductPrice()
+        .each(($e1, Index, $list) => {
+          const priceValue = $e1.text();
+          const numericPrice = parseFloat(priceValue.replace('£', ''));
+          sumOfProducts = parseFloat(sumOfProducts) + numericPrice;
+          console.log('sumOfProducts', sumOfProducts);
+        })
+        .then(() => {
+          // Calculate the discount amount based on a discount - discount value is varying based on promocode
+          //let discountPercentage = 19.0543401553;
+          let discountAmountOfperc = parseFloat(
+            (sumOfProducts * data.discountPercentage) / 100
+          );
+          let FormattedDiscountAmount = discountAmountOfperc.toFixed(2);
+          console.log('after sumOfProducts ', sumOfProducts);
+          console.log('discount amount', discountAmountOfperc);
+          checkoutPage.getDiscountPrice().then(($ele) => {
+            const discontPriceText = $ele.text();
+            console.log('DiscountPriceText', discontPriceText);
+            expect(discontPriceText).to.contain(FormattedDiscountAmount);
+          });
         });
-      });
-
+    });
     // Remove the promo code from the cart to reset the cart values
     checkoutPage.clickRemoveCodeButton();
 
