@@ -76,7 +76,7 @@ npm run cy:open
 The tests follow a modular and maintainable structure:
 
 ```
-|-- .github
+|-- .vscode
 |
 |-- cypress
 |     |-- e2e
@@ -127,6 +127,21 @@ Mochawesome report (Logs are attached) is stored in the `cypress/reports` direct
 
 ```
  npm run cy:headed "cypress\e2e\qaCodingChallenge\*.cy.js"
+
+
+```
+
+## To install the ESLint and prettier
+
+```
+# Install ESLint
+npm install eslint --save-dev
+
+# Install Prettier
+npm install prettier --save-dev
+
+# Install ESLint Prettier integration to avoid conflicts
+npm install eslint-config-prettier eslint-plugin-prettier --save-dev
 
 ```
 
