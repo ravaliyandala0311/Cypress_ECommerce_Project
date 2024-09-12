@@ -2,24 +2,24 @@ import { recurse } from 'cypress-recurse';
 export default class PageLogin {
   // Method to click on Accept Button cookies
   clickCookiesAcceptButton() {
-    return cy.get('#onetrust-accept-btn-handler').click();
+    return cy.get('#onetrust-accept-btn-handler').should('be.visible').click();
   }
 
   // Method to  click on Login Button
   clickLoginButton() {
-    return cy.get('.b-login_form-group_cta  > .m-width_full').click();
+    return cy.get('.m-width_full.m-small').should('be.visible').click();
   }
 
   // Method to click on SignIn Button
   clickSignInButton() {
-    return cy.get("[title='Sign in']").should('be.visible').click();
+    return cy.get('.b-header_login-icon').should('be.visible').click();
   }
 
   //Constructor
   constructor() {
-    this.emailInput = '.b-form_section  > #dwfrm_login_email';
+    this.emailInput = '#dwfrm_login_email';
     this.passwordInput = '#dwfrm_login_password';
-    this.loginButton = '.b-login_form-group_cta  > .m-width_full';
+    this.loginButton = '.b-button.m-width_full.m-small';
   }
 
   // Method to visit login page

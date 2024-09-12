@@ -2,7 +2,7 @@ export default class HomePage {
   // Method to select the product
   searchProduct(productName) {
     return cy
-      .get("[aria-label='Search combobox']")
+      .get('#header-search-input')
       .should('be.visible')
       .type(productName);
   }

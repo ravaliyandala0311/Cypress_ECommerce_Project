@@ -1,12 +1,12 @@
 export default class RegistrationPage {
   // Method to click of SignIn button
   clickSignInButton() {
-    return cy.get("[title='Sign in']").should('be.visible').click();
+    return cy.get('.b-header_login-icon').should('be.visible').click();
   }
   // Method to click of Register Button
   clickRegisterButton() {
     return cy
-      .get('.b-registration_benefits > .b-button')
+      .get('.b-button.m-small.b-registration_benefits-button')
       .should('be.visible')
       .click();
   }
@@ -21,7 +21,10 @@ export default class RegistrationPage {
   }
   // Method to click on continue button
   clickContinueButton() {
-    return cy.get('[data-ref="step1"] > .b-button').click();
+    return cy
+      .get('[data-ref="step1"] > .b-button')
+      .should('be.visible')
+      .click();
   }
   // Method to check the email confirm box
   checkRegistartionEmailConfirmBox() {
@@ -61,7 +64,9 @@ export default class RegistrationPage {
   }
   // Method to click on CreateAccount Button
   clickCreatAccount() {
-    return cy.get(':nth-child(9) > .b-button').click({ force: true });
+    return cy
+      .get('.b-form_section > .b-button.m-width_full')
+      .click({ force: true });
   }
   // Method to verify the error message
   getEmailIdErrorMessage() {
