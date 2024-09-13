@@ -53,13 +53,7 @@ Click on the image above to watch the tutorials. -->
 
    ```
 
-2. Navigate to the project directory:
-
-   ```bash
-   cd CypressDemo
-   ```
-
-3. Install dependencies:
+2. Install dependencies:
 
    ```bash
    npm install
