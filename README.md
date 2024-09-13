@@ -53,7 +53,7 @@ Click on the image above to watch the tutorials. -->
 
    ```
 
-2. Navigate to the Project Diractory
+2. Navigate to the Project Directory
 
    ```bash
    cd Cypress_ECommerce_Project
