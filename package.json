@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "cypress": "^13.3.0",
+    "cypress": "^13.14.2",
     "cypress-mochawesome-reporter": "^3.8.2",
     "cypress-recurse": "^1.35.3",
     "cypress-xpath": "^2.0.1",

@@ -53,7 +53,13 @@ Click on the image above to watch the tutorials. -->
 
    ```
 
-2. Install dependencies:
+2. Navigate to the Project Diractory
+
+   ```bash
+   cd Cypress_ECommerce_Project
+   ```
+
+3. Install dependencies:
 
    ```bash
    npm install
